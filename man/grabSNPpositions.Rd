@@ -20,7 +20,7 @@ latest genome release; if any specific version is required, please provide
 it here (e.g., "37" will give GRCh37)}
 }
 \value{
-data.frame or GRanges object with the fetched information; columns 
+data.frame or GRanges object with the fetched information; columns
   are named as the given attributes
 }
 \description{

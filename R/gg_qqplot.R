@@ -12,23 +12,25 @@
 #' Adapted by Julia Romanowska to include data grouping
 #'
 #' @param ps Vector of p-values; if named, the names give groups.
-#' @param ci Size of the confidence interval, 95% by default.
+#' @param ci Size of the confidence interval, 95\% by default.
 #' @param eq.axes Logical: should the axes show equal range? Default: TRUE.
 #' @return A ggplot2 plot.
 #' @examples
 #' library(ggplot2)
 #' gg_qqplot(runif(1e2)) + theme_grey(base_size = 24)
+#'
+#' @export
 gg_qqplot <- function(ps, ci = 0.95, eq.axes = TRUE) {
   n_groups <- 1
   if(!is.null(names(ps))){
     n_groups <- length(unique(names(ps)))
   }
   df <- create_df_qq(ps, ci)
-  
+
   log10Pe <- expression(paste("Expected -log"[10], plain(P)))
   log10Po <- expression(paste("Observed -log"[10], plain(P)))
   max.lims <- range( c( df$observed, df$expected ) ) + 0.5
-  
+
   plot.out <- ggplot(df) +
     geom_abline(intercept = 0, slope = 1, alpha = 0.5) +
     geom_line(aes(expected, cupper), linetype = 2) +
@@ -55,7 +57,7 @@ gg_qqplot <- function(ps, ci = 0.95, eq.axes = TRUE) {
 #'
 #' @param ps - vector with p-values; if a named vector is given, the creation
 #'    of Q-values will be performed in groups based on the levels of names
-#' @param ci - confidence interval (default: 95%)
+#' @param ci - confidence interval (default: 95\%)
 #'
 #' @return tibble (data.frame) with following columns:
 #'  \itemize{

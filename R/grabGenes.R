@@ -6,6 +6,7 @@
 #' @param asGRangesList - whether to return the results as GRanges (check
 #'    regioneR::GRanges for help) - boolean, defaults to FALSE
 #'
+#' @export
 
 grabGenes <- function(
   positions,

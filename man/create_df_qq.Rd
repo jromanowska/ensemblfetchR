@@ -10,7 +10,7 @@ create_df_qq(ps, ci = 0.95)
 \item{ps}{- vector with p-values; if a named vector is given, the creation
 of Q-values will be performed in groups based on the levels of names}
 
-\item{ci}{- confidence interval (default: 95%)}
+\item{ci}{- confidence interval (default: 95\%)}
 }
 \value{
 tibble (data.frame) with following columns:

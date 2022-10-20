@@ -9,7 +9,8 @@
 #' @param asGRanges - whether to return the results as GRanges (check
 #'    regioneR::GRanges for help) - boolean, defaults to FALSE
 #' @param genom_ver - which genome version? default: NULL - newest version
-#' 
+#'
+#' @export
 
 grabGenesEnsembl <- function(
   positions,
@@ -23,7 +24,7 @@ grabGenesEnsembl <- function(
          call. = FALSE)
   }
   requireNamespace('biomaRt')
-  
+
   if(!all(names(positions) %in% filters)){
     stop("Columns of 'positions' data.frame should be the same as filters!",
          call. = FALSE)
@@ -50,7 +51,7 @@ grabGenesEnsembl <- function(
   )
   cur_genes_ensembl <- as_tibble(cur_genes_ensembl) %>%
     filter(uniprotswissprot != "")
-  
+
   if(asGRanges){
     if(nrow(cur_genes_ensembl) == 0){
       return(NULL)

@@ -1,5 +1,5 @@
 #' Fetching SNP positions based on their names
-#' 
+#'
 #' @param snp_names - character vector with names of the SNPs
 #' @param attribs - which attributes do you want to fetch? Check `listAttributes`
 #'   in {biomaRt} package
@@ -8,9 +8,11 @@
 #' @param genome_ver - by default, function will fetch information from the
 #'   latest genome release; if any specific version is required, please provide
 #'   it here (e.g., "37" will give GRCh37)
-#'   
-#' @return data.frame or GRanges object with the fetched information; columns 
+#'
+#' @return data.frame or GRanges object with the fetched information; columns
 #'   are named as the given attributes
+#' @export
+
 grabSNPpositions <- function(
     snp_names,
     attribs,
@@ -40,9 +42,9 @@ grabSNPpositions <- function(
       GRCh = genome_ver
     )
   }
-  
+
   filter <- "snp_filter"
-  
+
   snps <- getBM(
       attributes = attribs,
       filters = filter,
@@ -72,7 +74,7 @@ grabSNPpositions <- function(
 }
 
 #' Fetching genes positions based on their names or IDs
-#' 
+#'
 #' @param gene_symbols - character vector with names or IDs of the genes
 #' @param filter_name - which filter is used? Check `listFilters` function in
 #'   the {biomaRt} package for help (default: "hgnc_symbol")
@@ -84,8 +86,8 @@ grabSNPpositions <- function(
 #' @param genome_ver - by default, function will fetch information from the
 #'   latest genome release; if any specific version is required, please provide
 #'   it here (e.g., "37" will give GRCh37)
-#'   
-#' @return data.frame or GRanges object with the fetched information; columns 
+#'
+#' @return data.frame or GRanges object with the fetched information; columns
 #'   are named as the given attributes
 grabGenesPositions <- function(
     gene_symbols,

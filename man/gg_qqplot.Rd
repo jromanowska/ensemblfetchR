@@ -9,7 +9,7 @@ gg_qqplot(ps, ci = 0.95, eq.axes = TRUE)
 \arguments{
 \item{ps}{Vector of p-values; if named, the names give groups.}
 
-\item{ci}{Size of the confidence interval, 95% by default.}
+\item{ci}{Size of the confidence interval, 95\% by default.}
 
 \item{eq.axes}{Logical: should the axes show equal range? Default: TRUE.}
 }
@@ -32,4 +32,5 @@ Adapted by Julia Romanowska to include data grouping
 \examples{
 library(ggplot2)
 gg_qqplot(runif(1e2)) + theme_grey(base_size = 24)
+
 }
