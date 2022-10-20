@@ -49,8 +49,7 @@ grabGenesEnsembl <- function(
     attribs = attribs,
     filters = filters
   )
-  cur_genes_ensembl <- as_tibble(cur_genes_ensembl) %>%
-    filter(uniprotswissprot != "")
+  cur_genes_ensembl <- as_tibble(cur_genes_ensembl)
 
   if(asGRanges){
     if(nrow(cur_genes_ensembl) == 0){
