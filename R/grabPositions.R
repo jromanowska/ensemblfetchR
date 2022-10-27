@@ -89,6 +89,8 @@ grabSNPpositions <- function(
 #'
 #' @return data.frame or GRanges object with the fetched information; columns
 #'   are named as the given attributes
+#' @export
+
 grabGenesPositions <- function(
     gene_symbols,
     filter_name = "hgnc_symbol",
