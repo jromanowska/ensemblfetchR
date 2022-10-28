@@ -32,10 +32,18 @@ grabGenes <- function(
 	    positions_ranges <- regioneR::toGRanges(
 	      data.frame(cur_data)
 	    )
+	    # where to focus?
+	    zoom_range <- range(c(cur_data$start, cur_data$end))
+	    zoom_reg <- toGRanges(data.frame(
+				chrom,
+				zoom_range[1],
+				zoom_range[2]
+			))
+
 	    pdf(NULL)
 	    kp_tmp <- karyoploteR::plotKaryotype(
 	      chromosomes = cur_row$chromosome_name,
-	      zoom = positions_ranges
+	      zoom = zoom_reg
 	    )
 	    genes.data <- suppressMessages(karyoploteR::makeGenesDataFromTxDb(
 	      TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
