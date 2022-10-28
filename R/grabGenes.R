@@ -24,32 +24,31 @@ grabGenes <- function(
       no = paste0("chr", chromosome_name)
     ))
 
-  genes_data_list <- purrr::map(1:nrow(positions_cp), function(row){
-    cur_row <- positions_cp[row,]
-    positions_ranges <- regioneR::toGRanges(
-      data.frame(
-        chr = cur_row$chromosome_name,
-        start = cur_row$start,
-        end = cur_row$end
-      )
-    )
-    pdf(NULL)
-    kp_tmp <- karyoploteR::plotKaryotype(
-      chromosomes = cur_row$chromosome_name,
-      zoom = positions_ranges
-    )
-    genes.data <- suppressMessages(karyoploteR::makeGenesDataFromTxDb(
-      TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
-      karyoplot = kp_tmp
-    ))
-    if(!is.null(genes.data)){
-      genes.data <- karyoploteR::addGeneNames(genes.data)
-      out <- karyoploteR::mergeTranscripts(genes.data)
-    } else {
-      out <- NULL
-    }
-    dev.off()
-    return(out)
+  genes_data_list <- purrr::map(
+  	unique(positions_cp$chromosome_name),
+  	function(chrom){
+	    cur_data <- positions_cp %>%
+	    	filter(chromosome_name == chrom)
+	    positions_ranges <- regioneR::toGRanges(
+	      data.frame(cur_data)
+	    )
+	    pdf(NULL)
+	    kp_tmp <- karyoploteR::plotKaryotype(
+	      chromosomes = cur_row$chromosome_name,
+	      zoom = positions_ranges
+	    )
+	    genes.data <- suppressMessages(karyoploteR::makeGenesDataFromTxDb(
+	      TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
+	      karyoplot = kp_tmp
+	    ))
+	    if(!is.null(genes.data)){
+	      genes.data <- karyoploteR::addGeneNames(genes.data)
+	      out <- karyoploteR::mergeTranscripts(genes.data)
+	    } else {
+	      out <- NULL
+	    }
+	    dev.off()
+	    return(out)
   })
 
   if(!asGRangesList){

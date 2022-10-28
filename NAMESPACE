@@ -3,5 +3,6 @@
 export(gg_qqplot)
 export(grabGenes)
 export(grabGenesEnsembl)
+export(grabGenesPositions)
 export(grabRegulRegions)
 export(grabSNPpositions)
